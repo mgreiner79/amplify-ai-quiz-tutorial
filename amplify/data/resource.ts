@@ -33,6 +33,16 @@ const schema = a.schema({
       allow.owner(),
       allow.publicApiKey().to(["read"]),
     ]),
+
+  QuizAttempt: a
+    .model({
+      quizId: a.string(),
+      userId: a.string(),
+      score: a.integer(),
+      totalPossible: a.integer(),
+      answers: a.string().array(),
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
